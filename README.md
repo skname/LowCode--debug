@@ -8,7 +8,7 @@
   - components 组件
   - hooks 封装公共 hook
   - router
-    - routes 配置路由，全部使用动态导入
+    - routes 配置路由使用动态导入
   - store 配置本地数据管理
     - module
       - getter
