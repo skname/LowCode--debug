@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "outDir": "./dist/",
+        "module":"ES2022",
+        "target":"ES6",
+        "allowJs": true,
+        "moduleResolution": "Node",
+        "baseUrl": "./",
+        "paths": {
+            "@utils/*": [
+                "./src/utils/*"
+            ],
+            "@api/*": [
+                "./src/api/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.vue",
+        "src/*.ts",
+        "src/*.vue"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
