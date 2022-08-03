@@ -1,10 +1,8 @@
 <template>
-  <router-view></router-view>
-  <el-button>按钮</el-button>
+<h1>about</h1>
 </template>
 
 <script setup>
-
 </script>
 
 <style scoped>

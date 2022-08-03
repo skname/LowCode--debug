@@ -13,6 +13,9 @@
             ],
             "@api/*": [
                 "./src/api/*"
+            ],
+            "@plugins/*": [
+                "./src/plugins/*"
             ]
         }
     },

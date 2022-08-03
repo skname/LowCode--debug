@@ -2,6 +2,10 @@ const Path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const webpack = require('webpack')
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
 const resolve = path => {
     return Path.resolve(path)
 }
@@ -27,7 +31,8 @@ module.exports = {
             '@comp': resolve('src/components'),
             '@views': resolve('src/views'),
             '@hooks': resolve('src/hooks'),
-            '@utils': resolve('src/utils')
+            '@utils': resolve('src/utils'),
+            '@plugins': resolve('src/plugins'),
         },
         extensions: ['.vue', '.ts', '.js']
     },
@@ -52,11 +57,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                include: resolve('src'),
-                exclude: /node_modules/,
+                // include: resolve('src'),
+                // exclude: /node_modules/,
                 use: [
+                    // 'style-loader',
                     'vue-style-loader',
-                    'css-loader'
+                    'css-loader',
                 ]
             },
             {
@@ -79,7 +85,13 @@ module.exports = {
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: false,
             __VUE_PROD_DEVTOOLS__: true
-        })
+        }),
+        AutoImport({
+            resolvers: [ElementPlusResolver()],
+        }),
+        Components({
+            resolvers: [ElementPlusResolver()],
+        }),
     ],
     devServer: {
         static: resolve('./dist'),
@@ -88,6 +100,11 @@ module.exports = {
         https: false,
         hot: true,
         open: true,
+        historyApiFallback: {
+            rewriter: [
+                { from: /./, to: '/public/index.html' }
+            ]
+        },
         proxy: { // 启动代理
             "/api": {
                 target: "http://localhost:3000/",
